@@ -1,12 +1,12 @@
 # Purpose
 
-Pull request screen of modern Bitbucket Server has a lot of redundant UI elements interfering a review process. This Google Chrome extension is aimed to remove (on demand) this unnecessary UI elements and increase the area of displayed code.
+Pull request screen of modern Bitbucket Server has redundant UI elements interfering a review process. This Google Chrome extension is aimed to remove (on demand) this unnecessary UI elements and increase the area of displayed code.
 
 # How to use
 
 1. Build
 2. Install
-3. Click on extension's button to toggle the PR's view
+3. Click on extension's button to modify the PR's view
 
 # How to build
 
