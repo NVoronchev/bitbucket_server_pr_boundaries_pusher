@@ -1,0 +1,29 @@
+#!/bin/sh
+
+set -ex
+
+SCRIPT_DIR="$(dirname "$(readlink -e "${BASH_SOURCE[0]}")")"
+DOCKER_BINARY="${DOCKER_BINARY:-docker}"
+
+if where cygpath 1>/dev/null ; then
+    SCRIPT_DIR="$(cygpath -w "${SCRIPT_DIR}")"
+fi
+
+name=bitbucket_server_pr_boundaries_pusher
+image=${name}:latest
+
+src_mount=/src/bitbucket_server_pr_boundaries_pusher
+
+"${DOCKER_BINARY}" build \
+    --build-arg SRC_MOUNT=${src_mount} \
+    -f "${SCRIPT_DIR}/Dockerfile" \
+    --tag ${image} \
+    "${SCRIPT_DIR}"
+
+"${DOCKER_BINARY}" run \
+    --rm \
+    --name ${name} \
+    --volume "${SCRIPT_DIR}/..:${src_mount}" \
+    ${DOCKERARGS} \
+    ${image} \
+    make -C "${src_mount}" "$@"
